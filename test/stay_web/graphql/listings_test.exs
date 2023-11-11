@@ -12,14 +12,38 @@ defmodule StayWeb.Graphql.ListingsTest do
         number_of_bathrooms: 1,
         property_type: "Apartment",
         max_guests: 4,
-        amenities: "WiFi, Parking, Kitchen",
-        inserted_at: "2023-01-01T12:00:00",
-        updated_at: "2023-01-01T12:00:00"
+        amenities: "WiFi, Parking, Kitchen"
       }
       |> Map.merge(attrs)
 
     {:ok, listing} = Listings.create_listing(listing_attrs)
     listing
+  end
+
+  test "listing query successfully retrieves a single listing", %{conn: conn} do
+    test_listing = insert_test_listing(%{title: "Test Listing"})
+
+    query = """
+      query GetListing($id: ID!) {
+        listing(id: $id) {
+          id
+          title
+        }
+      }
+    """
+
+    variables = %{
+      "id" => Integer.to_string(test_listing.id)
+    }
+
+    response =
+      post(conn, "/graphql", %{query: query, variables: variables})
+      |> json_response(200)
+      |> Map.get("data")
+      |> Map.get("listing")
+
+    assert response["id"] == test_listing.id
+    assert response["title"] == "Test Listing"
   end
 
   test "create_listing mutation successfully creates a listing", %{conn: conn} do
@@ -80,6 +104,16 @@ defmodule StayWeb.Graphql.ListingsTest do
         listings {
           id
           title
+          description
+          location
+          price
+          number_of_bedrooms
+          number_of_bathrooms
+          property_type
+          max_guests
+          amenities
+          inserted_at
+          updated_at
         }
       }
     """

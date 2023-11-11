@@ -29,9 +29,7 @@ defmodule Stay.Listings.Listing do
       :number_of_bathrooms,
       :property_type,
       :max_guests,
-      :amenities,
-      :inserted_at,
-      :updated_at
+      :amenities
     ])
     |> validate_required([
       :title,
@@ -42,9 +40,7 @@ defmodule Stay.Listings.Listing do
       :number_of_bathrooms,
       :property_type,
       :max_guests,
-      :amenities,
-      :inserted_at,
-      :updated_at
+      :amenities
     ])
   end
 end

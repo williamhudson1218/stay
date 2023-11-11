@@ -12,8 +12,8 @@ defmodule Stay.Users.User do
     field :phone_number, :string
     field :date_of_birth, :date
     field :bio, :string
-    field :inserted_at, :naive_datetime
-    field :updated_at, :naive_datetime
+
+    timestamps(type: :utc_datetime)
   end
 
   @doc false
@@ -28,9 +28,7 @@ defmodule Stay.Users.User do
       :phone_number,
       :date_of_birth,
       :location,
-      :bio,
-      :inserted_at,
-      :updated_at
+      :bio
     ])
     |> validate_required([
       :email,
@@ -41,9 +39,7 @@ defmodule Stay.Users.User do
       :phone_number,
       :date_of_birth,
       :location,
-      :bio,
-      :inserted_at,
-      :updated_at
+      :bio
     ])
     |> unique_constraint(:email)
   end

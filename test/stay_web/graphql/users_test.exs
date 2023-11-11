@@ -12,9 +12,7 @@ defmodule StayWeb.Graphql.UsersTest do
       profile_picture: "url/to/picture.jpg",
       phone_number: "1234567890",
       date_of_birth: "1990-01-01",
-      bio: "A test user",
-      inserted_at: "2023-01-01T12:00:00",
-      updated_at: "2023-01-01T12:00:00"
+      bio: "A test user"
     }
 
     {:ok, user} = Users.create_user(user_attrs)
@@ -31,9 +29,7 @@ defmodule StayWeb.Graphql.UsersTest do
       profile_picture: "url/to/picture.jpg",
       phone_number: "1234567890",
       date_of_birth: "1990-01-01",
-      bio: "A test user",
-      inserted_at: "2023-01-01T12:00:00",
-      updated_at: "2023-01-01T12:00:00"
+      bio: "A test user"
     }
 
     mutation = """

@@ -22,18 +22,14 @@ defmodule Stay.Bookings.Booking do
       :check_out_date,
       :number_of_guests,
       :total_price,
-      :status,
-      :inserted_at,
-      :updated_at
+      :status
     ])
     |> validate_required([
       :check_in_date,
       :check_out_date,
       :number_of_guests,
       :total_price,
-      :status,
-      :inserted_at,
-      :updated_at
+      :status
     ])
   end
 end
