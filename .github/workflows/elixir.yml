@@ -1,8 +1,6 @@
 name: Elixir CI/CD
-
 env:
   ACTIONS_STEP_DEBUG: true
-
 on:
   push:
     branches: ["main"]
@@ -30,7 +28,6 @@ jobs:
         run: mix test
 
   deploy:
-    echo "hello"
     runs-on: ubuntu-latest
 
     needs: build
