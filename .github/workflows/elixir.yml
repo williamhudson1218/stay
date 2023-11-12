@@ -1,0 +1,53 @@
+name: Elixir CI/CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          elixir-version: "1.15.2"
+
+      - name: Install Dependencies
+        run: mix deps.get
+
+      - name: Run Tests
+        run: mix test
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Elixir
+        uses: actions/setup-elixir@v1
+        with:
+          elixir-version: "1.15.2"
+
+      - name: Install Gigalixir CLI
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
+          mix archive.install hex gigalixir --force
+
+      - name: Deploy to Gigalixir
+        run: |
+          echo 32dfe21c-7646-462e-824f-2b4732d269a0 | gigalixir login
+          gigalixir git:remote stay
+          git push -f gigalixir main
