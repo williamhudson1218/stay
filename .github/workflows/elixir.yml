@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Elixir
-        uses: actions/setup-elixir@v1
+        uses: actions/setup-elixir@v2
         with:
           elixir-version: "1.15.2"
           otp-version: "26.0"
@@ -34,12 +34,13 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Elixir
-        uses: actions/setup-elixir@v1
+        uses: actions/setup-elixir@v2
         with:
           elixir-version: "1.15.2"
+          otp-version: "26.0"
 
       - name: Install Gigalixir CLI
         run: |
