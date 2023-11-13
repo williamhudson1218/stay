@@ -6,19 +6,14 @@ import Config
 # which you should run after static files are built and
 #
 # config/prod.exs or config/dev.exs
-# config/prod.exs
-
-use Mix.Config
-
-# Configure your production database
 config :stay, Stay.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "0360c2cc-3f6e-4bdf-ae42-b7f996a0bc75-user",
-  password: "pw-6bd8645d-7164-4072-b9ea-977fa3f33764",
-  database: "0360c2cc-3f6e-4bdf-ae42-b7f996a0bc75",
-  hostname: "postgres-free-tier-v2020.gigalixir.com",
-  port: 5432,
-  pool_size: 10
+  url:
+    {:system,
+     "postgresql://0360c2cc-3f6e-4bdf-ae42-b7f996a0bc75-user:pw-6bd8645d-7164-4072-b9ea-977fa3f33764@postgres-free-tier-v2020.gigalixir.com:5432/0360c2cc-3f6e-4bdf-ae42-b7f996a0bc75"},
+  ssl: true,
+  pool_size: 2
 
 config :stay, StayWeb.Endpoint, cache_static_manifest: "priv/static/cache_manifest.json"
 
