@@ -50,7 +50,6 @@ jobs:
 
       - name: Deploy to Gigalixir
         run: |
-          echo gigalixir account
           echo 32dfe21c-7646-462e-824f-2b4732d269a0 | gigalixir login
           gigalixir git:remote stay
           git push -f gigalixir main
